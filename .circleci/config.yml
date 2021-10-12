@@ -19,7 +19,7 @@ jobs:
           command: "echo Hello, World!"
       - run:
           name: "check ansible"
-          command: "ansible --version"
+          command: "sudo python -m pip install ansible"
 
 
 # Invoke jobs via workflows
