@@ -19,7 +19,7 @@ jobs:
           command: "python -m pip install -U pip"
       - run:
           name: "install gcc"
-          command: "pip install gcc7"
+          command: "pip install gcc"
       - run:
           name: "check ansible"
           command: "pip install ansible"
