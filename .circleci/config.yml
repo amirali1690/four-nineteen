@@ -2,6 +2,15 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+
+commands:
+  destroy_environments:
+    steps:
+      - run:
+          name: destroy stack
+          command: | 
+            delete-stack  --stack-name test
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
@@ -40,10 +49,30 @@ jobs:
             else
               echo "It failed"
             fi
+  create_infrastructure:
+    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run:
+          name: run cloudformation template
+          command: |
+            create-stack --stack-name test --template-body template.yml
+      - run:
+          name: simulate error
+          command: |
+            return 1
+      - destroy_environments
+          when: on_fail 
+
+
+
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   say-hello-workflow:
     jobs:
-      - smoke-test
+      - create_infrastructure
