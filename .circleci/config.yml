@@ -57,6 +57,9 @@ jobs:
     
     steps:
       - checkout
+      - add_ssh_keys: 
+          fingerprints:
+            - "af:d4:ce:fa:40:77:b6:1b:74:ec:cf:98:cb:ba:3a:32"
       - run:
           name: run cloudformation template
           command: |
