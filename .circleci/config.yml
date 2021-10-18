@@ -27,7 +27,7 @@ jobs:
             ansible-playbook -i inventory main-remote.yml
   smoke-test:
     docker:
-      - image: python:3.7-alpine3.11
+      - image: curlimages/curl
     
     steps:
       - checkout
