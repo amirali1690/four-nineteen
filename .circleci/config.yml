@@ -77,7 +77,7 @@ jobs:
       - run:
           name: run cloudformation template
           command: |
-            aws cloudformation create-stack --stack-name test --template-body template.yml
+            aws cloudformation create-stack --stack-name test --template-body file://template.yml
       - run:
           name: simulate error
           command: |
