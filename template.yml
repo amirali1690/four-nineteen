@@ -12,6 +12,6 @@ Resources:
     Type: 'AWS::EC2::Instance'
     Properties:
       SecurityGroups:
-        - !GetAtt InstanceSecurityGroup.id
+        - !Ref  InstanceSecurityGroup
       KeyName: udacity
       ImageId: 'ami-068663a3c619dd892'
