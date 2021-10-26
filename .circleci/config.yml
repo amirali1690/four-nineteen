@@ -65,6 +65,16 @@ jobs:
           fingerprints:
             - "af:d4:ce:fa:40:77:b6:1b:74:ec:cf:98:cb:ba:3a:32"
       - run:
+          name: config awscli
+          command: |
+            aws configure set aws_access_key_id \
+            "$AWS_ACCESS_KEY_ID	" 
+      - run:
+          name: config awscli
+          command: |
+            aws configure set aws_secret_access_key \
+            "$AWS_SECRET_ACCESS_KEY	"
+      - run:
           name: run cloudformation template
           command: |
             aws cloudformation create-stack --stack-name test --template-body template.yml
