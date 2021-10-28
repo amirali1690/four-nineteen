@@ -1,8 +1,8 @@
+AWSTemplateFormatVersion: '2010-09-09'
 Parameters:
-# Existing Bucket name
   PipelineID:
-    Description: Existing Bucket name
     Type: String
+    Description: Existing Bucket name
 Resources:
   CloudFrontOriginAccessIdentity:
     Type: "AWS::CloudFront::CloudFrontOriginAccessIdentity"
