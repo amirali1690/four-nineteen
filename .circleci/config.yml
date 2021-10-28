@@ -153,12 +153,12 @@ workflows:
   say-hello-workflow:
     jobs:
       - create_and_deploy_frontend
-      - get_last_deployment_id:
-          requires:
-            - create_and_deploy_frontend
-      - promote_to_production:
-          requires:
-            - get_last_deployment_id
+      #- get_last_deployment_id:
+       #   requires:
+        #    - create_and_deploy_frontend
+      #- promote_to_production:
+       #   requires:
+        #    - get_last_deployment_id
       - clean_up_old_front_end:
           requires:
-            - promote_to_production
+            - create_and_deploy_frontend
