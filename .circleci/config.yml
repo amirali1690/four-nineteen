@@ -108,6 +108,12 @@ jobs:
             aws cloudformation \
             list-exports --query "Exports[?Name=='PipelineID'].Value" \
             --no-paginate --output text > ~/textfile.txt
+      - run:
+          name: echo old pipeline ID
+          command: |
+            aws cloudformation \
+            list-exports --query "Exports[?Name=='PipelineID'].Value" \
+            --no-paginate --output text
       - persist_to_workspace:
           root: ~/
           paths:
@@ -156,9 +162,9 @@ workflows:
       - get_last_deployment_id:
           requires:
             - create_and_deploy_frontend
-      #- promote_to_production:
-       #   requires:
-        #    - get_last_deployment_id
-      - clean_up_old_front_end:
+      - promote_to_production:
           requires:
             - get_last_deployment_id
+      - clean_up_old_front_end:
+          requires:
+            - promote_to_production
